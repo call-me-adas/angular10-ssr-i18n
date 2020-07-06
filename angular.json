@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ssr-i18n-test",
+            "outputPath": "dist/ssr-i18n-test/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -33,6 +33,20 @@
             "scripts": []
           },
           "configurations": {
+            "pl": {
+              "outputPath": "dist/browser/pl/",
+              "i18nFile": "src/locale/messages.pl.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "pl",
+              "i18nMissingTranslation": "error"
+            },
+            "en": {
+              "outputPath": "dist/browser/en/",
+              "i18nFile": "src/locale/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "i18nMissingTranslation": "error"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -71,6 +85,12 @@
           "configurations": {
             "production": {
               "browserTarget": "ssr-i18n-test:build:production"
+            },
+            "pl": {
+              "browserTarget": "ssr-i18n-test:build:pl"
+            },
+            "en": {
+              "browserTarget": "ssr-i18n-test:build:en"
             }
           }
         },
@@ -103,7 +123,8 @@
             "tsConfig": [
               "tsconfig.app.json",
               "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "e2e/tsconfig.json",
+              "tsconfig.server.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -120,6 +141,67 @@
             "production": {
               "devServerTarget": "ssr-i18n-test:serve:production"
             }
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/ssr-i18n-test/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            },
+            "pl": {
+              "outputPath": "dist/server/pl/",
+              "i18nFile": "src/locale/messages.pl.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "pl",
+              "i18nMissingTranslation": "error"
+            },
+            "en": {
+              "outputPath": "dist/server/en/",
+              "i18nFile": "src/locale/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "i18nMissingTranslation": "error"
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "ssr-i18n-test:build",
+            "serverTarget": "ssr-i18n-test:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ssr-i18n-test:build:production",
+              "serverTarget": "ssr-i18n-test:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "ssr-i18n-test:build:production",
+            "serverTarget": "ssr-i18n-test:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
           }
         }
       }
