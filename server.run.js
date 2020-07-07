@@ -5,11 +5,21 @@ const path = require('path');
 function app() {
   const server = express();
 
-  ['en', 'pl'].forEach((locale) => {
-    console.log(path.join(__dirname, 'dist', 'server', locale, 'main.js'));
+  const appServerModule = require(path.join(__dirname, 'dist', 'server', 'en', 'main.js'));
+  server.get('/', appServerModule.app('en'));
+
+  ['pl'].forEach((locale) => {
     const appServerModule = require(path.join(__dirname, 'dist', 'server', locale, 'main.js'));
+
     server.use(`/${locale}`, appServerModule.app(locale));
   });
+
+
+
+  // server.get('/', (req, res) => {
+  //   res.redirect('en');
+  // });
+  // req.headers["accept-language"]
 
   return server;
 }

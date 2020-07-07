@@ -38,14 +38,16 @@
               "i18nFile": "src/locale/messages.pl.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "pl",
-              "i18nMissingTranslation": "error"
+              "i18nMissingTranslation": "error",
+              "baseHref": "pl"
             },
             "en": {
               "outputPath": "dist/browser/en/",
               "i18nFile": "src/locale/messages.en.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "en",
-              "i18nMissingTranslation": "error"
+              "i18nMissingTranslation": "error",
+              "baseHref": ""
             },
             "production": {
               "fileReplacements": [

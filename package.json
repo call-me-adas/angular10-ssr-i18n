@@ -10,8 +10,9 @@
     "e2e": "ng e2e",
     "dev:ssr": "ng run ssr-i18n-test:serve-ssr",
     "serve:ssr": "node server.run.js",
-    "build:ssr:pl": "ng build --configuration=production,pl && ng run ssr-i18n-test:server:production --configuration=pl",
-    "build:ssr:en": "ng build --configuration=production,en && ng run ssr-i18n-test:server:production --configuration=en"
+    "build:ssr:all": "npm run build:ssr:pl && npm run build:ssr:en",
+    "build:ssr:pl": "ng build --configuration=production,pl && ng run ssr-i18n-test:server:production --configuration=production,pl",
+    "build:ssr:en": "ng build --configuration=production,en && ng run ssr-i18n-test:server:production --configuration=production,en"
   },
   "private": true,
   "dependencies": {
